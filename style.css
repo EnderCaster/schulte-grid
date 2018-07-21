@@ -10,15 +10,16 @@ body {
 }
 
 button {
-    width: 50%;
+    width: fit-content;
     height: 30%;
+    font-size: 1cm;
 }
 
 #not-game {
     text-align: center;
 }
 
-#wapper {
+#wrapper {
     border: 1px solid black;
     background-color: lightblue;
 }
@@ -46,4 +47,7 @@ button {
     border: 0.05cm solid black;
     cursor: pointer;
     display: table-cell;
+}
+#counter-wrapper{
+    width: fit-content;
 }

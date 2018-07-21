@@ -3,6 +3,18 @@ var WIDTH = 5;
 var HEIGHT = 5;
 //Page Load Complete
 $().ready(function () {
+    $("#game-field").hide();
+    $('#counter-wrapper').hide();
+    // setWapperArea();
+});
+//Game Variables
+var start_time = 0;
+var end_time = 0;
+var number_this_time = 1;
+
+
+//Game Functions
+function init(){
     // init 
     var content = '<table class="game_table">';
     var total = 1;
@@ -16,25 +28,23 @@ $().ready(function () {
     }
     content += "</table>";
     $("#game-field").html(content);
-    $("#game-field").hide();
-    // setWapperArea();
-});
-//Game Variables
-var start_time = 0;
-var end_time = 0;
-var number_this_time = 1;
-
-//Game Functions
+}
 function reset() {
+    WIDTH=$('#width').val()?$('#width').val():WIDTH;
+    HEIGHT=$('#height').val()?$('#height').val():HEIGHT;
+    init();
     number_this_time = 1;
+    $("#counter").html(number_this_time);
     start_time = (new Date).getTime();
     var game_value = getNewRandomField();
     for (i in game_value) {
         $('#gfd_' + (~~i + 1)).html(game_value[i]);
     }
     $("#game-field").show();
+    $('#counter-wrapper').show();
     $("#not-game").hide();
 }
+
 function getNewRandomField() {
     var game_value = {};
     var game_keys = [];
@@ -57,14 +67,15 @@ function getNewRandomField() {
     }
     return game_value_return;
 }
+
 function cellClick(_self) {
     var number = $('#' + _self.id).html();
     number = ~~number;
     console.log(number);
     if (number == number_this_time) {
         number_this_time++;
+        $(_self).css('background-color',"black")
     }
-    console.log(number_this_time);
     judge();
 }
 // function tips() {
@@ -83,7 +94,10 @@ function judge() {
         var show_time = Number((end_time - start_time) / 1000).toFixed(3) + "s"
         $("#message").html('<h2>Time: ' + show_time + '</h2>');
         $("#game-field").hide();
+        $('#counter-wrapper').hide();
         $("#not-game").show();
+    } else {
+        $("#counter").html(number_this_time);
     }
 }
 

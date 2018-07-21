@@ -15,9 +15,12 @@
     <div id="header">
         <p>Assume There has a picture</p>
     </div>
-    <div id="wapper">
+    <div id="wrapper">
         <div id="game-field">
 
+        </div>
+        <div id='counter-wrapper'>你需要点击：
+            <span id="counter"></span>
         </div>
         <div id="not-game">
             <div id="message">
@@ -26,11 +29,14 @@
             <button id="start-button" onclick="reset()">
                 Click to start
             </button>
+            <span>5*5已经拦不住我啦！</span>
+            <input type="text" id="width" placeholder="宽">
+            <input type="text" id="height" placeholder="高">
             <br/>
             <span id="tips">按顺序点击数字</span>
         </div>
     </div>
- 
+
 </body>
 
 </html>
