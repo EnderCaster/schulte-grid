@@ -14,30 +14,37 @@
 
     <body>
         <div id="header">
-            <p>Assume There has a picture</p>
+            <p>不知道什么时候就能有头图了，但现在实在是懒得做</p>
         </div>
         <div id="schulte-app">
-            <Tabs value="Setting">
+            <Tabs value="Game">
                 <tab-pane label="设置" name="Setting">
                     <Row type="flex" justify="center">
                         <i-col span="20">
                             <h3>难易度选择</h3>
                             <radio-group v-model="difficulty">
-                                <radio label="easy">
-                                    <!-- <icon type="social-apple"></icon> -->
-                                    <span>Easy 点击后正确后会变黑</span>
-                                </radio>
-                                <radio label="normal">
-                                    <!-- <icon type="social-android"></icon> -->
-                                    <span>Normal 标准舒尔特方格</span>
-                                </radio>
-                                <radio label="hard">
-                                    <!-- <icon type="social-windows"></icon> -->
-                                    <span>Hard 你甚至不能一直看着,数字消失之前的点击是无效的</span>
-                                </radio>
+                                <Row>
+                                    <radio label="easy" large>
+                                        <!-- <icon type="social-apple"></icon> -->
+                                        <span>Easy 点击后正确后会变黑</span>
+                                    </radio>
+                                </Row>
+                                <Row>
+                                    <radio label="normal" large>
+                                        <!-- <icon type="social-android"></icon> -->
+                                        <span>Normal 标准舒尔特方格</span>
+                                    </radio>
+                                </Row>
+                                <Row>
+
+                                    <radio label="hard" large>
+                                        <!-- <icon type="social-windows"></icon> -->
+                                        <span>Hard 你甚至不能一直看着,数字消失之前的点击是无效的</span>
+                                    </radio>
+                                </Row>
                             </radio-group>
 
-                            <h3>听说你觉得5*5不够爽？来这里自定义行列数量</h3>
+                            <h3>自定义行列数量</h3>
                             <ul>
                                 <li>宽:
                                     <i-input type="text" v-model="warp_width">
