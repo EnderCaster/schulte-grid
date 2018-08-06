@@ -6,37 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script src="https://cdn.bootcss.com/iview/2.14.0/iview.js"></script>
+    <link href="https://cdn.bootcss.com/iview/2.14.0/styles/iview.css" rel="stylesheet">
     <title>舒尔特方格</title>
     <link rel="stylesheet" href="style.css">
-    <script src="schulte_grid.js"></script>
+
+    <body>
+        <div id="header">
+            <p>Assume There has a picture</p>
+        </div>
+        <div id="schulte-app">
+            <Tabs value="Setting">
+                <tab-pane label="设置" name="Setting">
+                    <Row type="flex" justify="center">
+                        <i-col span="20">
+                            <h3>难易度选择</h3>
+                            <radio-group v-model="difficulty">
+                                <radio label="easy">
+                                    <!-- <icon type="social-apple"></icon> -->
+                                    <span>Easy 点击后正确后会变黑</span>
+                                </radio>
+                                <radio label="normal">
+                                    <!-- <icon type="social-android"></icon> -->
+                                    <span>Normal 标准舒尔特方格</span>
+                                </radio>
+                                <radio label="hard">
+                                    <!-- <icon type="social-windows"></icon> -->
+                                    <span>Hard 你甚至不能一直看着,数字消失之前的点击是无效的</span>
+                                </radio>
+                            </radio-group>
+
+                            <h3>听说你觉得5*5不够爽？来这里自定义行列数量</h3>
+                            <ul>
+                                <li>宽:
+                                    <i-input type="text" v-model="warp_width">
+                                </li>
+                                <li>长:
+                                    <i-input type="text" v-model="warp_height">
+                                </li>
+                            </ul>
+                            <h3>微调（由于屏幕标准不同，方格可能小于1cm边长）</h3>
+                            <ul>
+                                <li>倍率:
+                                    <i-input type="text" v-model="adjust">
+                                </li>
+                            </ul>
+                        </i-col>
+                    </Row>
+                </tab-pane>
+                <tab-pane label="游戏区域" name="Game">
+                    <div id="wrapper">
+                        <div id="game-field">
+
+                        </div>
+                        <div id='counter-wrapper'>你需要点击：
+                            <span id="counter"></span>
+                        </div>
+                        <div id="not-game">
+                            <div id="message">
+
+                            </div>
+                            <button id="start-button" onclick="reset()">
+                                Click to start
+                            </button>
+
+                            <br/>
+                            <span id="tips">按顺序点击数字</span>
+                        </div>
+                    </div>
+                </tab-pane>
+            </Tabs>
+
+        </div>
+
+        <script src="schulte_grid.js"></script>
 </head>
-
-<body>
-    <div id="header">
-        <p>Assume There has a picture</p>
-    </div>
-    <div id="wrapper">
-        <div id="game-field">
-
-        </div>
-        <div id='counter-wrapper'>你需要点击：
-            <span id="counter"></span>
-        </div>
-        <div id="not-game">
-            <div id="message">
-
-            </div>
-            <button id="start-button" onclick="reset()">
-                Click to start
-            </button>
-            <span>5*5已经拦不住我啦！</span>
-            <input type="text" id="width" placeholder="宽">
-            <input type="text" id="height" placeholder="高">
-            <br/>
-            <span id="tips">按顺序点击数字</span>
-        </div>
-    </div>
-
 </body>
 
 </html>

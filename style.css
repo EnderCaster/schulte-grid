@@ -47,7 +47,11 @@ button {
     border: 0.05cm solid black;
     cursor: pointer;
     display: table-cell;
+    font-size: 0.5cm;
 }
 #counter-wrapper{
     width: fit-content;
+}
+.ivu-input{
+    width: 300px;
 }

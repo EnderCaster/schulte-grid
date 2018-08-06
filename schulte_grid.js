@@ -1,11 +1,25 @@
+//Vue
+var settings = new Vue({
+    el: '#schulte-app',
+    data: {
+        warp_width: 5,
+        warp_height: 5,
+        adjust: 1,
+        difficulty: "normal"
+    },
+    methods: {
+
+    }
+})
+
 // Consts
-var WIDTH = 5;
-var HEIGHT = 5;
+var WIDTH = settings.warp_width;
+var HEIGHT = settings.warp_height;
 //Page Load Complete
 $().ready(function () {
     $("#game-field").hide();
     $('#counter-wrapper').hide();
-    // setWapperArea();
+
 });
 //Game Variables
 var start_time = 0;
@@ -14,7 +28,7 @@ var number_this_time = 1;
 
 
 //Game Functions
-function init(){
+function init() {
     // init 
     var content = '<table class="game_table">';
     var total = 1;
@@ -29,9 +43,10 @@ function init(){
     content += "</table>";
     $("#game-field").html(content);
 }
+
 function reset() {
-    WIDTH=$('#width').val()?$('#width').val():WIDTH;
-    HEIGHT=$('#height').val()?$('#height').val():HEIGHT;
+    WIDTH = settings.warp_width;
+    HEIGHT = settings.warp_height;
     init();
     number_this_time = 1;
     $("#counter").html(number_this_time);
@@ -40,9 +55,19 @@ function reset() {
     for (i in game_value) {
         $('#gfd_' + (~~i + 1)).html(game_value[i]);
     }
+    setWapperArea();
     $("#game-field").show();
     $('#counter-wrapper').show();
     $("#not-game").hide();
+    if (settings.difficulty == "hard") {
+        setTimeout("hardLevelAdditional()", 5000)
+    }
+}
+
+function hardLevelAdditional() {
+    console.log('did');
+    $(".game_table tr td").css('color', $(".game_table").css('background-color'))
+    start_time = (new Date).getTime();
 }
 
 function getNewRandomField() {
@@ -71,10 +96,14 @@ function getNewRandomField() {
 function cellClick(_self) {
     var number = $('#' + _self.id).html();
     number = ~~number;
-    console.log(number);
     if (number == number_this_time) {
-        number_this_time++;
-        $(_self).css('background-color',"black")
+        var hard_not_click = ($(".game_table tr td").css('color') != $(".game_table").css('background-color') && settings.difficulty == "hard");
+        if (!hard_not_click) {
+            number_this_time++;
+        }
+    }
+    if (settings.difficulty == "easy") {
+        $(_self).css('background-color', "black")
     }
     judge();
 }
@@ -92,7 +121,7 @@ function judge() {
     if (number_this_time > WIDTH * HEIGHT) {
         end_time = (new Date).getTime();
         var show_time = Number((end_time - start_time) / 1000).toFixed(3) + "s"
-        $("#message").html('<h2>Time: ' + show_time + '</h2>');
+        $("#message").html('<h2>Time: ' + show_time + 'Difficulty: '+settings.difficulty+'</h2>');
         $("#game-field").hide();
         $('#counter-wrapper').hide();
         $("#not-game").show();
@@ -103,6 +132,7 @@ function judge() {
 
 //System Control Functions
 function setWapperArea() {
-    $("#wapper").css("height", (HEIGHT * 1.2) + "cm");
-    $("#wapper").css("width", (WIDTH * 1.5) + "cm");
+    $(".game_table tr td").css('height', 1 * settings.adjust + "cm")
+    $(".game_table tr td").css('width', 1 * settings.adjust + "cm")
+    $(".game_table tr td").css('font-size', 0.5 * settings.adjust + "cm")
 }
