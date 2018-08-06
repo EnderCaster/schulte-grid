@@ -8,7 +8,9 @@ var settings = new Vue({
         difficulty: "normal"
     },
     methods: {
-
+        back: function () {
+            history.back();
+        }
     }
 })
 
@@ -121,7 +123,7 @@ function judge() {
     if (number_this_time > WIDTH * HEIGHT) {
         end_time = (new Date).getTime();
         var show_time = Number((end_time - start_time) / 1000).toFixed(3) + "s"
-        $("#message").html('<h2>Time: ' + show_time + 'Difficulty: '+settings.difficulty+'</h2>');
+        $("#message").html('<h2>Time: ' + show_time + 'Difficulty: ' + settings.difficulty + '</h2>');
         $("#game-field").hide();
         $('#counter-wrapper').hide();
         $("#not-game").show();
