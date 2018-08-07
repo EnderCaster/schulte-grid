@@ -5,7 +5,8 @@ var settings = new Vue({
         warp_width: 5,
         warp_height: 5,
         adjust: 1,
-        difficulty: "normal"
+        difficulty: "normal",
+        error_set_zero: false
     },
     methods: {
         back: function () {
@@ -102,6 +103,10 @@ function cellClick(_self) {
         var hard_not_click = ($(".game_table tr td").css('color') != $(".game_table").css('background-color') && settings.difficulty == "hard");
         if (!hard_not_click) {
             number_this_time++;
+        }
+    } else {
+        if (settings.error_set_zero) {
+            number_this_time = 1;
         }
     }
     if (settings.difficulty == "easy") {
